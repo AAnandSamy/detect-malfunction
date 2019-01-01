@@ -28,4 +28,4 @@ Detect malfunctions[DMF] application is used to identify the abnormal values fro
 
 ##### Support
 
-- By Email : ...
+- By Email : ..
