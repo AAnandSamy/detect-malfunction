@@ -15,8 +15,6 @@ package com.org.data.detect.malfunctions
 
 import java.io.FileInputStream
 import java.util.Properties
-
-import com.sun.deploy.association.utility.AppConstants
 import org.apache.log4j.Logger
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.joda.time.DateTime
@@ -24,13 +22,16 @@ import org.joda.time.DateTime
 import scala.collection.JavaConverters._
 
 object IngestionDr {
+  System.setProperty("hadoop.home.dir", "C:\\software\\hadoop");
   private val LOGGER = Logger.getLogger(this.getClass.getName)
 
   def main(args: Array[String]): Unit = {
 
+    val FILE_IN_PATH = "C:\\Aannd\\malfunction\\hmpaal data.csv"
 
     val spark = SparkSession
       .builder()
+      .master("local[*]")
       .appName("detect-malfunctions")
       .getOrCreate()
 
@@ -38,6 +39,14 @@ object IngestionDr {
 
     try {
 
+      /*  read source file */
+
+      val srcDf = spark.read
+        .option("delimiter", ",")
+        .option("header", "true")
+        .csv(FILE_IN_PATH);
+
+      srcDf.show(5,false)
 
 
     }
