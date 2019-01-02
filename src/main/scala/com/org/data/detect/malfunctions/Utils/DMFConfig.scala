@@ -12,7 +12,6 @@ object DMFConfig {
       "user" -> "user",
       "password" -> "password",
       "class" -> "test_table"
-
     )
     params
 
@@ -25,7 +24,7 @@ object DMFConfig {
       "user" -> "user",
       "password" -> "password",
       "class" -> "test_table",
-      "query" -> s"select * from $test_table where teststring = 'asdf'"
+      "query" -> s"select * from test_table where teststring = 'asdf'"
     )
     params
 
