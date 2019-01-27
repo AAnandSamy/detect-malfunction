@@ -22,7 +22,7 @@ Detect malfunctions[DMF] application is used to identify the abnormal values fro
 2. Spark 2.4.0
 3. kubernetes 1.2
 4. Scala 2.11
-5. orientdb
+5. snappydata
 
 ##### Deployment
 -  Secure cluster- SSL Enabled
