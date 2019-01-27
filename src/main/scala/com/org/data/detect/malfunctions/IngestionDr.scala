@@ -20,22 +20,22 @@ import com.org.data.detect.malfunctions.Utils.DMFConfig
 import org.apache.log4j.Logger
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.joda.time.DateTime
-import org.apache.spark.orientdb._
 
 import scala.collection.JavaConverters._
 
 object IngestionDr {
-  System.setProperty("hadoop.home.dir", "C:\\software\\hadoop");
+  System.setProperty("hadoop.home.dir", "C:\\SparkWinSetup\\hadoop");
   private val LOGGER = Logger.getLogger(this.getClass.getName)
 
-  private val prop = new Properties()
+  /*private val prop = new Properties()
   prop.load(new FileInputStream("config.properties")) // Read config from property file
-  private val propsMap=prop.asScala
+  private val propsMap=prop.asScala*/
 
   def main(args: Array[String]): Unit = {
 
-    val FILE_IN_PATH = "C:\\Aannd\\malfunction\\hmpaal data.csv"
-    val wrOpts=DMFConfig.orientWrOpts(propsMap)
+    val LOC_PATH = "C:\\personal\\malfunctions\\loc-hmpaal-data.csv"
+    val SERVICE_PATH = "C:\\personal\\malfunctions\\service-data.csv"
+
 
     val spark = SparkSession
       .builder()
@@ -47,27 +47,28 @@ object IngestionDr {
 
     try {
 
-      /*  read source file */
+      /*  read location data  */
 
-      val srcDf = spark.read
+      val locDf = spark.read
         .option("delimiter", ",")
         .option("header", "true")
-        .csv(FILE_IN_PATH);
+        .csv(LOC_PATH);
 
-      srcDf.show(5,false)
+      locDf.show(5,false)
+
+      /*  read service data  */
+
+      val snDf = spark.read
+        .option("delimiter", ",")
+        .option("header", "true")
+        .csv(SERVICE_PATH);
+
+      snDf.show(5,false)
 
       /*process the data*/
 
-      val finalDf = srcDf
 
-      /*data persist into Orient*/
 
-      finalDf
-        .write
-        .format("org.apache.spark.orientdb.documents")
-        .options(wrOpts)
-        .mode(SaveMode.Overwrite)
-        .save()
 
 
     }

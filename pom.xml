@@ -17,33 +17,19 @@
 
     <dependencies>
 
-    <!--Spark-->
-
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version.major}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${scala.version.major}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-
-        <!--snappydata database-->
+        <!--Spark-->
 
         <dependency>
-            <groupId>io.snappydata</groupId>
-            <artifactId>snappydata-core_2.11</artifactId>
-            <version>1.0.2.1</version>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_${scala.version.major}</artifactId>
+            <version>${spark.version}</version>
         </dependency>
-
-
         <dependency>
-            <groupId>io.snappydata</groupId>
-            <artifactId>snappy-spark-core_2.11</artifactId>
-            <version>2.1.1.4</version>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.version.major}</artifactId>
+            <version>${spark.version}</version>
         </dependency>
+
 
 
         <!--Common-->
