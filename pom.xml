@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.org.data.detect.malfunctions</groupId>
-    <artifactId>detect-malfunction</artifactId>
+    <artifactId>detect-malfunction-snap</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
@@ -30,6 +30,19 @@
             <version>${spark.version}</version>
         </dependency>
 
+       <!-- snappydata database  -->
+
+        <dependency>
+            <groupId>io.snappydata</groupId>
+            <artifactId>snappydata-core_2.11</artifactId>
+            <version>1.0.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.snappydata</groupId>
+            <artifactId>snappydata-cluster_2.11</artifactId>
+            <version>1.0.2.1</version>
+        </dependency>
 
 
         <!--Common-->
