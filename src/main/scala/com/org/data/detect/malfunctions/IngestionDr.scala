@@ -25,14 +25,14 @@ object IngestionDr {
 
   private val LOGGER = Logger.getLogger(this.getClass.getName)
   private val prop = new Properties()
-  prop.load(new FileInputStream("src/main/resources/app-config.properties")) // Read config from property file
-  private val propsMap=prop.asScala
+  prop.load(new FileInputStream("src/main/resources/app-config.properties"))
+  private val propsMap = prop.asScala
   System.setProperty("hadoop.home.dir", propsMap("hadoop.home.dir"));
 
   def main(args: Array[String]): Unit = {
 
-      val LOC_PATH = propsMap("hdfs.in.loc")+"\\hmpaal-data*"
-      val SERVICE_PATH = propsMap("hdfs.in.loc")+"\\service-data*"
+    val LOC_PATH = propsMap("hdfs.in.loc") + "\\hmpaal-data*"
+    val SERVICE_PATH = propsMap("hdfs.in.loc") + "\\service-data*"
 
 
     val spark = SparkSession
@@ -62,12 +62,8 @@ object IngestionDr {
       /*process the data*/
       //join key
 
-      locDf.join(snDf,"join_key")
-        .show(20,false)
-
-
-
-
+      locDf.join(snDf, "join_key")
+        .show(20, false)
 
 
     }

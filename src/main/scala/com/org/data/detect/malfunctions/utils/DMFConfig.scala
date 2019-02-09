@@ -1,4 +1,4 @@
-package com.org.data.detect.malfunctions.Utils
+package com.org.data.detect.malfunctions.utils
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable
