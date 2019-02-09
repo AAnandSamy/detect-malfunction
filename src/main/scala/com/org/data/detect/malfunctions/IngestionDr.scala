@@ -15,8 +15,6 @@ package com.org.data.detect.malfunctions
 
 import java.io.FileInputStream
 import java.util.Properties
-
-import com.org.data.detect.malfunctions.Utils.DMFConfig
 import org.apache.log4j.Logger
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.joda.time.DateTime
@@ -24,17 +22,17 @@ import org.joda.time.DateTime
 import scala.collection.JavaConverters._
 
 object IngestionDr {
-  System.setProperty("hadoop.home.dir", "C:\\SparkWinSetup\\hadoop");
-  private val LOGGER = Logger.getLogger(this.getClass.getName)
 
-  /*private val prop = new Properties()
-  prop.load(new FileInputStream("config.properties")) // Read config from property file
-  private val propsMap=prop.asScala*/
+  private val LOGGER = Logger.getLogger(this.getClass.getName)
+  private val prop = new Properties()
+  prop.load(new FileInputStream("src/main/resources/app-config.properties")) // Read config from property file
+  private val propsMap=prop.asScala
+  System.setProperty("hadoop.home.dir", propsMap("hadoop.home.dir"));
 
   def main(args: Array[String]): Unit = {
 
-    val LOC_PATH = "C:\\personal\\malfunctions\\loc-hmpaal-data.csv"
-    val SERVICE_PATH = "C:\\personal\\malfunctions\\service-data.csv"
+      val LOC_PATH = propsMap("hdfs.in.loc")+"\\hmpaal-data*"
+      val SERVICE_PATH = propsMap("hdfs.in.loc")+"\\service-data*"
 
 
     val spark = SparkSession
@@ -54,8 +52,6 @@ object IngestionDr {
         .option("header", "true")
         .csv(LOC_PATH);
 
-      locDf.show(5,false)
-
       /*  read service data  */
 
       val snDf = spark.read
@@ -63,9 +59,12 @@ object IngestionDr {
         .option("header", "true")
         .csv(SERVICE_PATH);
 
-      snDf.show(5,false)
-
       /*process the data*/
+      //join key
+
+      locDf.join(snDf,"join_key")
+        .show(20,false)
+
 
 
 
